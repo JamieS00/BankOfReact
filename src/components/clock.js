@@ -1,5 +1,6 @@
 import React from 'react';
 import {Component} from 'react';
+//import {TextInput} from 'react'
 
 
 // just class def & you shuld hve only 1 render call
@@ -30,19 +31,20 @@ class Clock extends Component {
     render() {
       return (
         <div>
-          <h1>Hello "name here", Welcome to Bank of React!</h1>
+          <h1>Hello ... Welcome to Bank of React!</h1>
           <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
 
 
           <h3>Customize your profile</h3>
           <h4>Update your username below ! </h4>
+          <input type="text" value={this.state.value} onChange={this.handleChange}/> 
+          <input type="submit" value="Submit" /> 
+          
           
         </div>
       );
     }
   }
-  
-  
 
 
   export default Clock; //export them from the file 
