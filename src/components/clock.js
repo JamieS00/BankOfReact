@@ -44,36 +44,36 @@ class Clock extends Component {
       });
     }
 
-    // handleSelect = (e) =>{
-    //   this.setState({selectValue:e.target.value});
-    //   if (e.target.value == 'Debits'){
-    //     React.useEffect(() => {
-    //       axios.get('https://moj-api.herokuapp.com/debits').then((response) => { 
-    //         this.setState({data:response.data});
+    handleSelect = (e) =>{
+      this.setState({selectValue:e.target.value});
+      if (e.target.value == 'Debits'){
+        React.useEffect(() => {
+          axios.get('https://moj-api.herokuapp.com/debits').then((response) => { 
+            this.setState({data:response.data});
             
-    //       });
-    //     }, []);
+          });
+        }, []);
         
         
-    //   } 
-    //   else if (e.target.value == 'Credits'){
-    //     React.useEffect(() => {
-    //       axios.get('https://moj-api.herokuapp.com/credits').then((response) => { 
-    //         this.setState({data:response.data});
+      } 
+      else if (e.target.value == 'Credits'){
+        React.useEffect(() => {
+          axios.get('https://moj-api.herokuapp.com/credits').then((response) => { 
+            this.setState({data:response.data});
             
-    //       });
-    //     }, []);
+          });
+        }, []);
         
 
-    //   }
-    // }
-
-    //not sure 
-    async componentDidMount(){
-      let response = await axios.get('https://moj-api.herokuapp.com/debits')
-      let debits = response.data;
-      this.setState({debits: debits});
+      }
     }
+
+    // //not sure 
+    // async componentDidMount(){
+    //   let response = await axios.get('https://moj-api.herokuapp.com/debits')
+    //   let debits = response.data;
+    //   this.setState({debits: debits});
+    // }
 
   
 
