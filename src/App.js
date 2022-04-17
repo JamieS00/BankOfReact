@@ -2,8 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 
 import Clock from './components/Clock'; // have to use them to import & also export
-//import User from './components/User';
-//import Content from './components/Content';
+//import Form from './components/Form';
 
 
 
@@ -11,6 +10,7 @@ function App() {
   return (
     <div>
       <Clock/>
+      
   </div>
   );
 }

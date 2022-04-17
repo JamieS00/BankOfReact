@@ -15,9 +15,7 @@ class Clock extends Component {
     componentDidMount() {
       this.timerID = setInterval(
         () => this.tick(),1000 //1000 ms, which is in seconds
-      );
-
-      
+      ); 
     }
   
     componentWillUnmount() {
@@ -67,14 +65,6 @@ class Clock extends Component {
 
       }
     }
-
-    // //not sure 
-    // async componentDidMount(){
-    //   let response = await axios.get('https://moj-api.herokuapp.com/debits')
-    //   let debits = response.data;
-    //   this.setState({debits: debits});
-    // }
-
   
 
     
@@ -85,17 +75,8 @@ class Clock extends Component {
           <h1>Hello {this.state.showName && <span> {this.state.userName}</span>}  welcome to Bank of React!</h1>
           <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
 
-          <h3>Update your username & Customize your profile below ! </h3>
-          
-          <div>
-            <form onSubmit={this.handleSubmit}>
-              <label>Enter Username</label>
-              <input type="text" name="firstName" onChange={this.displayNameHandler} value={this.state.firstName} />
-              <button type="submit" onClick={this.handleSubmit}>Submit</button>
-              
-          </form>
-          </div>
-
+        
+          {/* Credit/Debit drop down list*/}
           <h4>Select an option to view Credits or Debits</h4>
           <select value={this.state.selectValue} onChange={this.handleSelect}>
             <option value="Credits">Credits</option>
@@ -103,6 +84,45 @@ class Clock extends Component {
           </select>
 
           <p>{this.state.data}</p>
+
+
+
+
+          {/* Profile button - needs to display the form (where users enters name,
+          enter a hex value for background color and text color& this form should dissappear once submitted*/}
+          
+          <button onClick={this.handleClick}>CUSTOMIZE YOUR PROFILE </button>
+        
+          
+          <div>
+            {/* Username*/}
+            <form onSubmit={this.handleSubmit}>
+              <label>Update username</label>
+              <input type="text" name="firstName" onChange={this.displayNameHandler} value={this.state.firstName} />
+              <button type="submit" onClick={this.handleSubmit}>Submit</button>
+            </form>
+          </div>
+
+          <div>
+            {/*Background color*/}
+            <form onSubmit={this.handleSubmit}>
+              <label>Update background</label>
+              <input type="text" name="firstName" onChange={this.displayNameHandler} value={this.state.firstName} />
+              <button type="submit" onClick={this.handleSubmit}>Submit</button>
+            </form>
+          </div>
+
+          <div>
+            {/*Text color*/}
+            <form onSubmit={this.handleSubmit}>
+              <label>Update text color </label>
+              <input type="text" name="firstName" onChange={this.displayNameHandler} value={this.state.firstName} />
+              <button type="submit" onClick={this.handleSubmit}>Submit</button>
+            </form>
+          </div>
+
+
+          <button type="submit" onClick={this.handleSubmit}>FINAL SUBMIT</button>
           
         </div>
           
