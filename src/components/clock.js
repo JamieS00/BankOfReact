@@ -1,6 +1,7 @@
-import React from 'react';
+//import React from 'react';
 import {Component} from 'react';
 import axios from 'axios';
+import React,{useState} from 'react'
 
 
 // just class def & you shuld hve only 1 render call
@@ -11,10 +12,13 @@ class Clock extends Component {
       this.state = {date: new Date() ,firstName: '',showName: false, userName: '', selectValue: '',
       data: '' };
     }
+
+
   
     componentDidMount() {
       this.timerID = setInterval(
         () => this.tick(),1000 //1000 ms, which is in seconds
+        
       ); 
     }
   
@@ -26,6 +30,11 @@ class Clock extends Component {
       this.setState({
         date: new Date()
       });
+    }
+
+
+    componentDidUpdate(){
+      document.body.style.background = "#FFFF00";
     }
 
   
@@ -64,6 +73,11 @@ class Clock extends Component {
         
 
       }
+
+
+      {/* Show form if customize button is click*/}
+      // const [show,setShow] = useState(true)
+
     }
   
 
@@ -71,8 +85,10 @@ class Clock extends Component {
     //what is actually going to print out to the screen !
     render() {
       return (
+        
         <div>
-          <h1>Hello {this.state.showName && <span> {this.state.userName}</span>}  welcome to Bank of React!</h1>
+          {/* <h1 style={{color: "red"}}>Hello {this.state.showName && <span> {this.state.userName}</span>},  welcome to Bank of React!</h1> */}
+          <h1>Hello {this.state.showName && <span> {this.state.userName}</span>},  welcome to Bank of React!</h1>
           <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
 
         
@@ -91,38 +107,42 @@ class Clock extends Component {
           {/* Profile button - needs to display the form (where users enters name,
           enter a hex value for background color and text color& this form should dissappear once submitted*/}
           
-          <button onClick={this.handleClick}>CUSTOMIZE YOUR PROFILE </button>
+          <button onClick={this.handleClick}>CUSTOMIZE YOUR PROFILE</button>
+          {/* <div classname ="clock">
+            {
+              show?<h5>if it works this will show</h5>:null
+            }
+            <button onClick ={() => setShow(!show)}>Toggle </button>
+          </div> */}
         
-          
+          {/*Username*/}
           <div>
-            {/* Username*/}
             <form onSubmit={this.handleSubmit}>
               <label>Update username</label>
               <input type="text" name="firstName" onChange={this.displayNameHandler} value={this.state.firstName} />
-              <button type="submit" onClick={this.handleSubmit}>Submit</button>
+              {/* <button type="submit" onClick={this.handleSubmit}>Submit</button> */}
             </form>
           </div>
 
+          {/*Background color*/}
           <div>
-            {/*Background color*/}
             <form onSubmit={this.handleSubmit}>
               <label>Update background</label>
-              <input type="text" name="firstName" onChange={this.displayNameHandler} value={this.state.firstName} />
-              <button type="submit" onClick={this.handleSubmit}>Submit</button>
+              <input type="text" value={this.state.value} onChange={this.handleChange} />       
             </form>
-          </div>
+         </div>
 
+          {/*Text color*/}
           <div>
-            {/*Text color*/}
             <form onSubmit={this.handleSubmit}>
-              <label>Update text color </label>
-              <input type="text" name="firstName" onChange={this.displayNameHandler} value={this.state.firstName} />
-              <button type="submit" onClick={this.handleSubmit}>Submit</button>
+              <label>Update text color</label>
+              <input type="text" value={this.state.value} onChange={this.handleChange} />        
+                {/* <input type="submit" value="Submit" /> */}
             </form>
-          </div>
+         </div>
 
 
-          <button type="submit" onClick={this.handleSubmit}>FINAL SUBMIT</button>
+          <button type="submit" onClick={this.handleSubmit}>SUBMIT</button>
           
         </div>
           
