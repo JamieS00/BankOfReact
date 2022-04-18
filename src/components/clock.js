@@ -10,7 +10,7 @@ class Clock extends Component {
     constructor(props) {
       super(props);
       this.state = {date: new Date() ,firstName: '',showName: false, userName: '', selectValue: '',
-      data: '',bg_color: '', tempbg_color:'',textColor:'', temptext_color:'' };
+      data: '',bg_color: '', tempbg_color:'',textColor:'', temptext_color:'',click: true };
     }
 
 
@@ -60,8 +60,14 @@ class Clock extends Component {
         showName: true,
         userName: this.state.firstName,
         bg_color: this.state.tempbg_color,
-        textColor: this.state.temptext_color
+        textColor: this.state.temptext_color,
+        click: true
       });
+    }
+    handleClickOnCustomize = (e) => {
+      //let bool= e.target.value;
+      this.setState({click:false});
+      
     }
 
     handleSelect = (e) =>{
@@ -70,6 +76,7 @@ class Clock extends Component {
         React.useEffect(() => {
           axios.get('https://moj-api.herokuapp.com/debits').then((response) => { 
             this.setState({data:response.data});
+            console.log(response.data)
             
           });
         }, []);
@@ -80,6 +87,7 @@ class Clock extends Component {
         React.useEffect(() => {
           axios.get('https://moj-api.herokuapp.com/credits').then((response) => { 
             this.setState({data:response.data});
+            console.log(response.data)
             
           });
         }, []);
@@ -88,8 +96,7 @@ class Clock extends Component {
       }
 
 
-      {/* Show form if customize button is click*/}
-      // const [show,setShow] = useState(true)
+   
 
     }
   
@@ -100,7 +107,6 @@ class Clock extends Component {
       return (
         
         <div>
-          {/* <h1 style={{color: "red"}}>Hello {this.state.showName && <span> {this.state.userName}</span>},  welcome to Bank of React!</h1> */}
           <h1>Hello {this.state.showName && <span> {this.state.userName}</span>},  welcome to Bank of React!</h1>
           <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
 
@@ -120,46 +126,53 @@ class Clock extends Component {
           {/* Profile button - needs to display the form (where users enters name,
           enter a hex value for background color and text color& this form should dissappear once submitted*/}
           
-          <button onClick={this.handleClick}>CUSTOMIZE YOUR PROFILE</button>
-          {/* <div classname ="clock">
-            {
-              show?<h5>if it works this will show</h5>:null
-            }
-            <button onClick ={() => setShow(!show)}>Toggle </button>
-          </div> */}
+          <button onClick={this.handleClickOnCustomize}>CUSTOMIZE YOUR PROFILE</button>
         
           {/*Username*/}
           <div>
-            <form onSubmit={this.handleSubmit}>
-              <label>Update username</label>
+          {!this.state.click && <div> 
+            <form onSubmit={this.handleSubmit} >
+              <label>Update username </label>
               <input type="text" name="firstName" onChange={this.displayNameHandler} value={this.handleChange} />
               {/* <button type="submit" onClick={this.handleSubmit}>Submit</button> */}
             </form>
+          </div>}
           </div>
 
           {/*Background color*/}
           <div>
+          {!this.state.click && <div>
             <form onSubmit={this.handleSubmit}>
               <label>Update background</label>
               <input type="text" name="bg_color" onChange={this.displayColorHandler} value={this.handleChange} />       
             </form>
+         </div>}
          </div>
 
           {/*Text color*/}
           <div>
+          {!this.state.click &&<div>
             <form onSubmit={this.handleSubmit}>
               <label>Update text color</label>
               <input type="text" name="textColor"  onChange={this.displayTextColorHandler} value={this.handleChange}/>        
                 
             </form>
+         </div>}
          </div>
 
-
+          <div>
+          {!this.state.click &&<div>
           <button type="submit" onClick={this.handleSubmit}>SUBMIT</button>
-          
+          </div>}
+          </div>
+         
+
+
+
+
         </div>
           
-          // this.state.firstName
+        
           
         
       );
