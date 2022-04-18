@@ -10,7 +10,7 @@ class Clock extends Component {
     constructor(props) {
       super(props);
       this.state = {date: new Date() ,firstName: '',showName: false, userName: '', selectValue: '',
-      data: '' };
+      data: '',bg_color: '', tempbg_color:'',textColor:'', temptext_color:'' };
     }
 
 
@@ -21,7 +21,7 @@ class Clock extends Component {
         
       ); 
     }
-  
+   
     componentWillUnmount() {
       clearInterval(this.timerID);
     }
@@ -34,7 +34,8 @@ class Clock extends Component {
 
 
     componentDidUpdate(){
-      document.body.style.background = "#FFFF00";
+      document.body.style.background = this.state.bg_color;
+      document.body.style.color= this.state.textColor;
     }
 
   
@@ -42,12 +43,24 @@ class Clock extends Component {
       let updatedName = e.target.value;
       this.setState({ firstName: updatedName });
     }
+
+    displayColorHandler = (e) => {
+      let updated_color = e.target.value;
+      this.setState({ tempbg_color: updated_color });
+    }
+
+    displayTextColorHandler = (e) => {
+      let t_color = e.target.value;
+      this.setState({ temptext_color: t_color });
+    }
   
     handleSubmit = (e) => {
       e.preventDefault();
       this.setState({
         showName: true,
-        userName: this.state.firstName
+        userName: this.state.firstName,
+        bg_color: this.state.tempbg_color,
+        textColor: this.state.temptext_color
       });
     }
 
@@ -119,7 +132,7 @@ class Clock extends Component {
           <div>
             <form onSubmit={this.handleSubmit}>
               <label>Update username</label>
-              <input type="text" name="firstName" onChange={this.displayNameHandler} value={this.state.firstName} />
+              <input type="text" name="firstName" onChange={this.displayNameHandler} value={this.handleChange} />
               {/* <button type="submit" onClick={this.handleSubmit}>Submit</button> */}
             </form>
           </div>
@@ -128,7 +141,7 @@ class Clock extends Component {
           <div>
             <form onSubmit={this.handleSubmit}>
               <label>Update background</label>
-              <input type="text" value={this.state.value} onChange={this.handleChange} />       
+              <input type="text" name="bg_color" onChange={this.displayColorHandler} value={this.handleChange} />       
             </form>
          </div>
 
@@ -136,8 +149,8 @@ class Clock extends Component {
           <div>
             <form onSubmit={this.handleSubmit}>
               <label>Update text color</label>
-              <input type="text" value={this.state.value} onChange={this.handleChange} />        
-                {/* <input type="submit" value="Submit" /> */}
+              <input type="text" name="textColor"  onChange={this.displayTextColorHandler} value={this.handleChange}/>        
+                
             </form>
          </div>
 
@@ -146,7 +159,7 @@ class Clock extends Component {
           
         </div>
           
-          
+          // this.state.firstName
           
         
       );
