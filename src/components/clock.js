@@ -97,6 +97,10 @@ class Clock extends Component {
         let response = await axios.get("https://moj-api.herokuapp.com/debits");
         let debits = response.data;
         this.setState({debits: debits});
+
+        let sponse = await axios.get("https://moj-api.herokuapp.com/credits");
+        let credits = sponse.data;
+        this.setState({credits: credits});
       }  
 
       displayDebits = () => {
@@ -106,12 +110,18 @@ class Clock extends Component {
             return <li key={debit.id}>{debit.amount} {debit.description} {date}</li>
         }) 
       }
+      // displayCredit = () =>{
+      //   return <h2>credits</h2>;
+      // }
+
       displayCredit = () =>{
         const { credits } = this.state;
         return credits.map((credit) => {
             let date = credit.date.slice(0,10);
             return <li key={credit.id}>{credit.amount} {credit.description} {date}</li>
-      })
+        })
+      }
+      
   
 
     
@@ -133,12 +143,12 @@ class Clock extends Component {
 
           <p>{this.state.data}</p>
 
-          if(this.state.selected === "debits")
-          {
+          {/* if(this.state.selected === "debits"){
              return(<div>{this.displayDebits()}</div>);
           }
+          else{
             return <div>{this.displayCredit()}</div>;
-          }
+          } */}
 
           {/*--------------Credit/Debit drop down list----------------------------*/}
 
