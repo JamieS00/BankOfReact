@@ -107,8 +107,11 @@ class Clock extends Component {
         }) 
       }
       displayCredit = () =>{
-        return <h2>credits</h2>;
-      }
+        const { credits } = this.state;
+        return credits.map((credit) => {
+            let date = credit.date.slice(0,10);
+            return <li key={credit.id}>{credit.amount} {credit.description} {date}</li>
+      })
   
 
     
@@ -130,8 +133,9 @@ class Clock extends Component {
 
           <p>{this.state.data}</p>
 
-          if(this.state.selected === "debits"){
-             return (<div>{this.displayDebits()}</div>);
+          if(this.state.selected === "debits")
+          {
+             return(<div>{this.displayDebits()}</div>);
           }
             return <div>{this.displayCredit()}</div>;
           }
